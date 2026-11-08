@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, master, 'feature/**']
+  pull_request:
+    branches: [develop, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    name: build-test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Configure, build and test (Linux / macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: ./ci.sh
+
+      - name: Configure, build and test (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: ci.bat
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-${{ matrix.os }}
+          path: |
+            build/hello
+            build/hello.exe
+          if-no-files-found: error

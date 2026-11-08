@@ -40,3 +40,23 @@ GitHub Actions для Windows, Linux і macOS.
     ├── build-and-test/SKILL.md
     └── github-actions/SKILL.md
 ```
+
+<!-- hello-project:start -->
+## Проєкт Hello World
+
+| Параметр | Значення |
+|---|---|
+| Мова | JavaScript (Node.js 22) |
+| Система складання/запуску | npm scripts |
+| Тестування | Jest |
+| Виконуваний файл | `build/hello` (Linux/macOS), `build\hello.exe` (Windows) |
+
+```bash
+npm install        # залежності (jest, postject)
+npm start          # Hello, World!
+npm test           # юніт-тести, у т.ч. BasicAddition
+npm run build      # виконуваний файл build/hello + smoke-тест
+npm run check      # повна перевірка проєкту і агента
+./ci.sh            # те саме, що робить CI (Windows: ci.bat)
+```
+<!-- hello-project:end -->

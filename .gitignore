@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# build output (executables, SEA blobs)
+build/
+dist/
+*.blob
+
+# test / coverage output
+coverage/
+junit.xml
+
+# logs and caches
+npm-debug.log*
+.npm/
+.cache/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+
+# secrets: never commit
+.env
+.env.*
+*.pem
+*.key
